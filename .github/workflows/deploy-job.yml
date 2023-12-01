@@ -16,7 +16,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: run tests
-        run: mvn test -Dmaven.test.skip=true
+        run: ./mvnw test -Dmaven.test.skip=true
   prepare-environment:
     runs-on: self-hosted
     needs: test
