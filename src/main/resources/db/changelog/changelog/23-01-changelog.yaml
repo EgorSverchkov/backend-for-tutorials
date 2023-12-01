@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1698072537576-1
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: avatar_url
+                  type: VARCHAR(255)
+              - column:
+                  name: birthday
+                  type: VARCHAR(255)
+              - column:
+                  name: first_name
+                  type: VARCHAR(255)
+              - column:
+                  name: last_name
+                  type: VARCHAR(255)
+              - column:
+                  name: middle_name
+                  type: VARCHAR(255)
+            tableName: auser
+

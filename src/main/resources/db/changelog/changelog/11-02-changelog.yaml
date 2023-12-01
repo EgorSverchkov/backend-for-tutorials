@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1697009647299-1
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_refresh_token
+                  name: id
+                  type: UUID
+              - column:
+                  name: user_id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: token
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: expiry_date
+                  type: DATETIME
+            tableName: refresh_token
+  - changeSet:
+      id: 1697009647299-2
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addUniqueConstraint:
+            columnNames: token
+            constraintName: uc_refresh_token_token
+            tableName: refresh_token
+  - changeSet:
+      id: 1697009647299-3
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: refresh_token
+            constraintName: FK_REFRESH_TOKEN_ON_USER
+            referencedColumnNames: id
+            referencedTableName: auser
+

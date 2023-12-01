@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - include:
+      file: classpath:/db/changelog/changelog/11-01-changelog.yaml
+  - include:
+      file: classpath:/db/changelog/changelog/11-02-changelog.yaml
+  - include:
+      file: classpath:/db/changelog/changelog/11-03-changelog.yaml
+  - include:
+      file: classpath:/db/changelog/changelog/13-01-changelog.yaml
+  - include:
+      file: classpath:/db/changelog/changelog/13-02-changelog.yaml
+  - include:
+      file: classpath:/db/changelog/changelog/14-01-changelog.yaml
+  - include:
+      file: classpath:/db/changelog/changelog/19-01-changelog.yaml
+  - include:
+      file: classpath:/db/changelog/changelog/23-01-changelog.yaml
+  - include:
+      file: classpath:/db/changelog/changelog/25-01-changelog.yaml
+  - include:
+      file: classpath:/db/changelog/changelog/26-01-changelog.yaml

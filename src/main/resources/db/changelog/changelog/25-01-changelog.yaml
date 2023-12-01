@@ -1,0 +1,61 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1698225102959-3
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_tutorialtext
+                  name: id
+                  type: UUID
+              - column:
+                  name: text
+                  type: oid
+            tableName: tutorial_text
+  - changeSet:
+      id: 1698225102959-4
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: full_text
+                  type: UUID
+            tableName: tutorials
+  - changeSet:
+      id: 1698225102959-5
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: full_text
+            baseTableName: tutorials
+            constraintName: FK_TUTORIALS_ON_FULL_TEXT
+            referencedColumnNames: id
+            referencedTableName: tutorial_text
+  - changeSet:
+      id: 1698225102959-1
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - dropColumn:
+            columnName: description
+            tableName: tutorials
+  - changeSet:
+      id: 1698225102959-2
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: description
+                  type: oid
+            tableName: tutorials
+

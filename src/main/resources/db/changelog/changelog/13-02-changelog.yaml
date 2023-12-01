@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1697190196000-1
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: published
+                  type: BOOLEAN
+            tableName: tutorials
+  - changeSet:
+      id: 1697190196000-2
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - dropColumn:
+            columnName: is_published
+            tableName: tutorials
+

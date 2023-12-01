@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1697017336605-1
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_auser_roles
+                  name: user_entity_id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_auser_roles
+                  name: roles_id
+                  type: UUID
+            tableName: auser_roles
+  - changeSet:
+      id: 1697017336605-2
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_roles
+                  name: id
+                  type: UUID
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+            tableName: roles
+  - changeSet:
+      id: 1697017336605-3
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: roles_id
+            baseTableName: auser_roles
+            constraintName: fk_ausrol_on_role_entity
+            referencedColumnNames: id
+            referencedTableName: roles
+  - changeSet:
+      id: 1697017336605-4
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_entity_id
+            baseTableName: auser_roles
+            constraintName: fk_ausrol_on_user_entity
+            referencedColumnNames: id
+            referencedTableName: auser
+

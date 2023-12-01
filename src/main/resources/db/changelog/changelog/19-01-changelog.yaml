@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1697706932761-1
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addColumn:
+            columns:
+              - column:
+                  name: image
+                  type: VARCHAR(255)
+              - column:
+                  name: short_text
+                  type: VARCHAR(255)
+            tableName: tutorials
+
