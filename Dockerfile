@@ -1,5 +1,5 @@
 #
-# Build stage
+# Build
 #
 FROM openjdk:17-jdk-oraclelinux8 AS build
 ENV HOME=/app
@@ -9,7 +9,7 @@ ADD . $HOME
 RUN ./mvnw -X -f $HOME/pom.xml clean package -Dmaven.test.skip=true
 
 #
-# Package stage
+# Package
 #
 FROM eclipse-temurin:17.0.3_7-jre-jammy
 ARG JAR_FILE=/app/target/*.jar
