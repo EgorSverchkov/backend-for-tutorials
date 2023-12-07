@@ -1,5 +1,5 @@
 #
-# Build
+# Build stage
 #
 FROM openjdk:17-jdk-oraclelinux8 AS build
 ENV HOME=/app
