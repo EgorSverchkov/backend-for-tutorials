@@ -4,7 +4,7 @@ COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 COPY ./src ./src
 RUN mvn -X clean
-RUN mvn -X package -Dmaven.test.skip=true
+RUN mvn package -Dmaven.test.skip=true
 
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /opt/app
