@@ -3,8 +3,8 @@ WORKDIR /opt/app
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
 COPY ./src ./src
-ENTRYPOINT ["mvn", "-X", "clean"]
-ENTRYPOINT ["mvn", "package", "-Dmaven.test.skip=true", "clean"]
+CMD ["mvn", "-X", "clean"]
+CMD ["mvn", "package", "-Dmaven.test.skip=true", "clean"]
 
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /opt/app
