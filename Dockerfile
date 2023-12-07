@@ -1,13 +1,22 @@
-FROM eclipse-temurin:17-jdk-alpine as builder
-WORKDIR /opt/app
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
-COPY ./src ./src
-CMD ["mvn", "-X", "clean"]
-CMD ["mvn", "package", "-Dmaven.test.skip=true", "clean"]
+#FROM eclipse-temurin:17-jdk-alpine as builder
+#WORKDIR /opt/app
+#COPY .mvn/ .mvn
+#COPY mvnw pom.xml ./
+#COPY ./src ./src
+#CMD ["mvn", "-X", "clean"]
+#CMD ["mvn", "package", "-Dmaven.test.skip=true", "clean"]
+#
+#FROM eclipse-temurin:17-jre-alpine
+#WORKDIR /opt/app
+#COPY --from=builder /opt/app/target/*.jar /opt/app/*.jar
+#EXPOSE 8181
+#ENTRYPOINT ["java", "-jar", "/opt/app/*.jar"]
 
-FROM eclipse-temurin:17-jre-alpine
-WORKDIR /opt/app
-COPY --from=builder /opt/app/target/*.jar /opt/app/*.jar
-EXPOSE 8181
-ENTRYPOINT ["java", "-jar", "/opt/app/*.jar"]
+
+
+FROM maven:3.6.3-jdk-11-slim
+WORKDIR /app
+COPY . .
+EXPOSE 8080
+RUN mvn install --no-transfer-progress -DskipTests=true
+ENTRYPOINT ["mvn", "spring-boot:run"]
