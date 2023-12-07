@@ -8,8 +8,8 @@ services:
       dockerfile: Dockerfile
     links:
       - "service-db:database"
-    ports:
-      - "8000:8000"
+#    ports:
+#      - "8000:8000"
     depends_on:
       - service-db
     environment:
