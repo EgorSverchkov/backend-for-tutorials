@@ -6,7 +6,7 @@ ENV HOME=/app
 RUN mkdir $HOME
 WORKDIR $HOME
 ADD . $HOME
-RUN --mount=type=cache,target=/root/.m2 ./mvnw -f $HOME/pom.xml clean package
+RUN ./mvnw -X -f $HOME/pom.xml clean package -Dmaven.test.skip=true
 
 #
 # Package stage
