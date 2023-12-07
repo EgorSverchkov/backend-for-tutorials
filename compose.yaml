@@ -1,35 +1,30 @@
 version: '3.8'
 services:
-  postgresdb:
-    image: postgres
-    env_file: ./.env
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-    ports:
-      - "5433:5432"
-    volumes:
-      - ./db/create_db.sql:/docker-entrypoint-initdb.d/create_db.sql
-      - db:/var/lib/postgres
-    restart: unless-stopped
-
   backend:
-    #platform: linux/amd64
-    #image: client:0.0.1
-    build: ./app
-    restart: on-failure
-    env_file: ./.env
+    platform: linux/amd64
+    image: client:0.0.1
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "6868:8080"
-    volumes:
-      - .m2:/root/.m2
-    stdin_open: true
-    tty: true
+      - "8181:8181"
     depends_on:
-      - postgresdb
+      - service-db
     environment:
       - SERVER_PORT= 8181
       - SPRING_DATASOURCE_URL=jdbc:postgresql://service-db/tutorials_db
 
+  service-db:
+    image: postgres:14.7-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "15432:5432"
+    volumes:
+      - ./db/create_db.sql:/docker-entrypoint-initdb.d/create_db.sql
+      - db-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
 volumes:
-  db:
+  db-data:
