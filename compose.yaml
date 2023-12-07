@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    links:
+      - "service-db:database"
     ports:
       - "8000:8000"
     depends_on:
