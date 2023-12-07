@@ -19,21 +19,10 @@ jobs:
           cache: maven
       - name: clean install
         run: mvn -X clean install -Dmaven.test.skip=true
-#      - name: Build & push Docker image
-#        uses: mr-smithers-excellent/docker-build-push@v6
-#        with:
-#          image: egorsverchkov/tutorials-backend
-#          tags: latest
-#          registry: docker.io
-#          dockerfile: compose.yaml
-#          username: ${{ secrets.DOCKER_USERNAME }}
-#          password: ${{ secrets.DOCKER_PASSWORD }}
   prepare-environment:
     runs-on: self-hosted
     needs: test
     steps:
-#      - name: Stop and remove containers, networks
-#        run: docker-compose stop
       - name: Remove unused data
         run: docker system prune -a -f
   deploy:
