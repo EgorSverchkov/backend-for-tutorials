@@ -2,7 +2,6 @@
 # Build stage
 #
 FROM openjdk:17-jdk-oraclelinux8 AS build
-RUN mkdir /app
 WORKDIR /app
 ADD . /app
 RUN ./mvnw -X -f /app/pom.xml clean package -Dmaven.test.skip=true
