@@ -1,15 +1,18 @@
 #
-# BUILD STAGE
+# Build stage
 #
-FROM eclipse-temurin:17-jdk AS build
-COPY src /usr/src/app/src
-COPY pom.xml /usr/src/app
-RUN mvn -f /usr/src/app/pom.xml clean package -Dmaven.test.skip=true
+FROM eclipse-temurin:17-jdk-jammy AS build
+ENV HOME=/usr/app
+RUN mkdir -p $HOME
+WORKDIR $HOME
+ADD . $HOME
+RUN --mount=type=cache,target=/root/.m2 ./mvnw -f $HOME/pom.xml clean package
 
 #
-# PACKAGE STAGE
+# Package stage
 #
-FROM openjdk:17-jre-slim
-COPY --from=build /usr/src/app/target/tutorials-backend.jar /usr/app/tutorials-backend.jar
+FROM eclipse-temurin:17.0.3_7-jre-jammy
+ARG JAR_FILE=/usr/app/target/*.jar
+COPY --from=build $JAR_FILE /app/runner.jar
 EXPOSE 8080
-CMD ["java","-jar","/usr/app/tutorials-backend.jar"]
+ENTRYPOINT java -jar /app/runner.jar
