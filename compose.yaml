@@ -1,32 +1,44 @@
 version: '3.8'
 services:
+  postgresdb:
+    image: postgres
+    env_file: ./.env
+    environment:
+      - POSTGRES_USER=$POSTGRESDB_USER
+      - POSTGRES_PASSWORD = $POSTGRESDB_ROOT_PASSWORD
+      - POSTGRES_DB = $POSTGRESDB_DATABASE
+    ports:
+      - $POSTGRESDB_LOCAL_PORT:$POSTGRESDB_DOCKER_PORT
+    volumes:
+      - ./db/create_db.sql:/docker-entrypoint-initdb.d/create_db.sql
+      - db:/var/lib/postgres
+    restart: unless-stopped
+
   backend:
     #platform: linux/amd64
     image: client:0.0.1
-    build:
-      context: .
-      dockerfile: Dockerfile
-    links:
-      - "service-db:database"
-#    ports:
-#      - "8000:8000"
+    build: ./app
+    restart: on-failure
+    env_file: ./.env
+    ports:
+      - $SPRING_LOCAL_PORT:$SPRING_DOCKER_PORT
+    environment:
+      SPRING_APPLICATION_JSON: '{
+            "spring.datasource.url"  : "jdbc:postgresql://postgresdb:$POSTGRESDB_DOCKER_PORT/$POSTGRESDB_DATABASE",
+            "spring.datasource.username" : "$POSTGRESDB_USER",
+            "spring.datasource.password" : "$POSTGRESDB_ROOT_PASSWORD",
+            "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.PostgreSQLDialect",
+            "spring.jpa.hibernate.ddl-auto" : "update"
+          }'
+    volumes:
+      - .m2:/root/.m2
+    stdin_open: true
+    tty: true
     depends_on:
       - service-db
-    environment:
-      - SERVER_PORT= 8181
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://service-db/tutorials_db
-
-  service-db:
-    image: postgres:14.7-alpine
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    ports:
-      - "8001:5432"
-    volumes:
-      - ./db/create_db.sql:/docker-entrypoint-initdb.d/create_db.sql
-      - db-data:/var/lib/postgresql/data
-    restart: unless-stopped
+#    environment:
+#      - SERVER_PORT= 8181
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://service-db/tutorials_db
 
 volumes:
-  db-data:
+  db:
