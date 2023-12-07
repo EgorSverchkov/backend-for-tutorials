@@ -35,7 +35,7 @@ services:
     stdin_open: true
     tty: true
     depends_on:
-      - service-db
+      - postgresdb
 #    environment:
 #      - SERVER_PORT= 8181
 #      - SPRING_DATASOURCE_URL=jdbc:postgresql://service-db/tutorials_db
