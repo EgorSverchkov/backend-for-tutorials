@@ -9,7 +9,7 @@ on:
 jobs:
   build-docker-image-and-deploy-to-dockerhub:
     name: Build and deploy to docker hub
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -46,3 +46,13 @@ jobs:
           dockerfile: Dockerfile
           push: true
           tags: ${{secrets.DOCKER_USERNAME}}/tutorials-backend:latest
+
+  run-on-vps:
+    name: Run docker-compose on server
+    runs-on: self-hosted
+    needs: build-docker-image-and-deploy-to-dockerhub
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Compose up
+        run: docker-compose up -d

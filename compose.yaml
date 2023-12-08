@@ -2,10 +2,7 @@ version: '3.8'
 services:
   backend:
     #platform: linux/amd64
-    image: client:0.0.1
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: "egorsverchkov/tutorials-backend"
     ports:
       - "8181:8181"
     depends_on:
