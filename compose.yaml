@@ -2,7 +2,7 @@ version: '3.8'
 services:
   backend:
     #platform: linux/amd64
-    image: "egorsverchkov/tutorials-backend"
+    image: "egorsverchkov/tutorials-backend:latest"
     ports:
       - "8181:8181"
     depends_on:
