@@ -4,7 +4,7 @@ services:
     #platform: linux/amd64
     image: "egorsverchkov/tutorials-backend:latest"
     ports:
-      - "8080:8080"
+      - "8181:8080"
     depends_on:
       - service-db
     environment:
