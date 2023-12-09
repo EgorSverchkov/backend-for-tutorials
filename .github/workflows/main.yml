@@ -54,5 +54,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: Stop and remove old containers
+        run: docker-compose down
       - name: Compose up
         run: docker-compose up -d
