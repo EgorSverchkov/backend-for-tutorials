@@ -23,7 +23,6 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAnyRole('USER', 'MODERATOR','ADMIN')")
     public ResponseEntity<?> updateUser(@RequestBody UserUpdateRequest request, @PathVariable(name = "id") String id) {
         return ResponseEntity
                 .ok(userService
@@ -31,7 +30,6 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyRole('USER', 'MODERATOR','ADMIN')")
     public ResponseEntity<?> getUser(@PathVariable(name = "id") String id) {
         return ResponseEntity.ok(userService.loadUserById(id));
     }
