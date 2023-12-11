@@ -57,11 +57,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/tutorials/page/**").anonymous()
                         .requestMatchers("/api/swagger.html", "/api/swagger-ui/**", "/v3/api-docs/**").anonymous()
                         .requestMatchers("/api/tutorials/**").hasAnyAuthority("ADMIN", "MODERATOR", "USER")
-                        .requestMatchers("/api/test/user").hasAnyAuthority("ADMIN", "MODERATOR", "USER")
-                        .requestMatchers("/api/test/mod").hasAnyAuthority("ADMIN", "MODERATOR")
-                        .requestMatchers("/api/test/all").hasAnyAuthority("ADMIN")
-                        .requestMatchers("/api/test/admin").hasAuthority("ADMIN")
-                        .requestMatchers("/api/test/**").permitAll()
+                        .requestMatchers("/api/user/all").hasAnyAuthority("ADMIN")
+                        .requestMatchers("/api/user/**").permitAll()
                         .anyRequest().authenticated())
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
