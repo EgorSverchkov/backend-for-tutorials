@@ -14,7 +14,7 @@ import ru.sverchkov.backendfortutorials.service.UserService;
 import java.util.Date;
 
 @RestController
-@RequestMapping("/api/test")
+@RequestMapping("/api/user")
 @CrossOrigin(origins = "*", maxAge = 4800, methods = {RequestMethod.GET})
 public class UserController {
     private final UserService userService;
