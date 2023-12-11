@@ -8,7 +8,6 @@ import ru.sverchkov.backendfortutorials.exception.EmptyTokenException;
 import ru.sverchkov.backendfortutorials.exception.UserNotFoundException;
 import ru.sverchkov.backendfortutorials.model.request.UserUpdateRequest;
 import ru.sverchkov.backendfortutorials.model.response.EmptyTokenResponse;
-import ru.sverchkov.backendfortutorials.model.response.MessageResponse;
 import ru.sverchkov.backendfortutorials.service.UserService;
 
 import java.util.Date;
@@ -22,25 +21,6 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-
-    @GetMapping("/user")
-    @PreAuthorize("hasAnyRole('USER', 'MODERATOR', 'ADMIN')")
-    public MessageResponse userAccess() {
-        return new MessageResponse("Congratulations! You are an authenticated user.");
-    }
-
-    @GetMapping("/mod")
-    @PreAuthorize("hasAnyRole('MODERATOR', 'ADMIN')")
-    public MessageResponse moderatorAccess() {
-        return new MessageResponse("Moderator Board.");
-    }
-
-    @GetMapping("/admin")
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    public MessageResponse adminAccess() {
-        return new MessageResponse("Admin Board.");
-    }
-
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateUser(@RequestBody UserUpdateRequest request, @PathVariable(name = "id") String id) {
