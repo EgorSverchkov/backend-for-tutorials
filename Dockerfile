@@ -1,13 +1,10 @@
-FROM eclipse-temurin:17-jdk-alpine as builder
-WORKDIR /opt/app
-COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
-COPY ./src ./src
-RUN mvn -X clean
-RUN mvn -X package -Dmaven.test.skip=true
+FROM openjdk:18-jdk-oraclelinux8 AS build
 
-FROM eclipse-temurin:17-jre-alpine
-WORKDIR /opt/app
-COPY --from=builder /opt/app/target/*.jar /opt/app/*.jar
-EXPOSE 8181
-ENTRYPOINT ["java", "-jar", "/opt/app/*.jar"]
+WORKDIR /app
+
+COPY target/*.jar /app/application.jar
+
+EXPOSE 8080
+
+CMD ["java", "-jar", "application.jar"]
+
