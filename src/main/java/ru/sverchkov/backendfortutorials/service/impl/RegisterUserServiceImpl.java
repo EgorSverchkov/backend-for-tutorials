@@ -92,6 +92,6 @@ public class RegisterUserServiceImpl implements RegisterUserService {
         user.setRoles(roles);
         userRepository.save(user);
 
-        return ResponseEntity.ok(new MessageResponse("Пользователь зарегестрирован успешно!"));
+        return ResponseEntity.ok(new MessageResponse("Пользователь зарегистрирован успешно!"));
     }
 }
