@@ -52,6 +52,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          token: ${{secrets.REPO_TOKEN}}
       - name: Stop and remove other containers
         run: docker-compose down
       - name: Docker compose up
