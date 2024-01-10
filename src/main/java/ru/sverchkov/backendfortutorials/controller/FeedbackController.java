@@ -8,6 +8,7 @@ import ru.sverchkov.backendfortutorials.service.FeedbackService;
 
 @RestController
 @RequestMapping("/api/feedback")
+@CrossOrigin(origins = "*", maxAge = 3600)
 @Slf4j
 public class FeedbackController {
     private final FeedbackService feedbackService;
