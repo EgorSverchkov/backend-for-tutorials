@@ -4,10 +4,7 @@ import org.hibernate.proxy.HibernateProxy;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @Getter
@@ -49,6 +46,10 @@ public class UserEntity {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<RoleEntity> roles = new HashSet<>();
+
+    @OneToMany
+    @ToString.Exclude
+    private List<FeedbackEntity> feedbacks;
 
     @Override
     public final boolean equals(Object o) {

@@ -33,7 +33,7 @@ public class LoginUserServiceImpl implements LoginUserService {
 
     @Override
     public ResponseEntity<?> loginUser(LoginRequest loginRequest) {
-        log.info("authUser method called with loginRequest : {}", loginRequest);
+        log.info("loginUser method called with loginRequest : {}", loginRequest);
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(
                         loginRequest.getUsername(),

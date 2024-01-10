@@ -4,7 +4,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import ru.sverchkov.backendfortutorials.exception.EmptyTutorialIdException;
-import ru.sverchkov.backendfortutorials.exception.EmptyTutorialRequestException;
+import ru.sverchkov.backendfortutorials.exception.EmptyRequestException;
 import ru.sverchkov.backendfortutorials.exception.TutorialExistException;
 import ru.sverchkov.backendfortutorials.model.entity.TutorialEntity;
 import ru.sverchkov.backendfortutorials.model.entity.TutorialText;
@@ -49,7 +49,7 @@ public class TutorialServiceImpl implements TutorialService {
     @Override
     @Transactional
     public TutorialEntity createTutorial(TutorialRequest request) {
-        if(request == null) throw new EmptyTutorialRequestException(TUTORIAL_REQUEST_IS_NULL);
+        if(request == null) throw new EmptyRequestException(TUTORIAL_REQUEST_IS_NULL);
         return tutorialRepository.saveAndFlush(TutorialEntity.builder()
                         .title(request.getTitle())
                         .shortText(request.getShortText())
@@ -67,7 +67,7 @@ public class TutorialServiceImpl implements TutorialService {
     public TutorialEntity updateTutorial(UUID id, TutorialRequest request) {
         if(id == null) throw new EmptyTutorialIdException(TUTORIAL_ID_NULL);
 
-        if(request == null) throw new EmptyTutorialRequestException(TUTORIAL_REQUEST_IS_NULL);
+        if(request == null) throw new EmptyRequestException(TUTORIAL_REQUEST_IS_NULL);
 
         TutorialEntity tutorialEntity = tutorialRepository
                 .findById(id).orElseThrow(() -> new TutorialExistException(TUTORIAL_EXIST));
