@@ -29,6 +29,36 @@ import java.util.List;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig {
+    private static final String[] ANONYMOUS_LIST_URLS = {
+            "/api/auth/**",
+            "/api/tutorials/published",
+            "/api/tutorials/page/**",
+            "/api/feedback/active",
+            "/api/feedback/bytutorial/**",
+            "/api/swagger.html",
+            "/api/swagger-ui/**",
+            "/v3/api-docs/**"
+    };
+
+    private static final String[] PERMIT_ALL_LIST_URLS = {
+            "/api/user/**"
+    };
+
+    private static final String[] USER_LIST_URLS = {
+            "/api/tutorials/**",
+            "/api/feedback/byuser/**",
+            "/api/feedback/all",
+            "/api/user/user"
+    };
+
+    private static final String[] MODERATOR_LIST_URLS = {
+            "/api/user/mod"
+    };
+
+    private static final String[] ADMIN_LIST_URLS = {
+            "/api/user/all",
+            "/api/user/admin"
+    };
 
     private final AuthEntryPointJwt unauthorizedHandler;
 
@@ -52,20 +82,11 @@ public class SecurityConfig {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/api/auth/**").anonymous()
-                        .requestMatchers("/api/tutorials/published").anonymous()
-                        .requestMatchers("/api/tutorials/page/**").anonymous()
-                        .requestMatchers("/api/feedback/all").anonymous()
-                        .requestMatchers("/api/feedback/active").anonymous()
-                        .requestMatchers("/api/feedback/bytutorial/**").anonymous()
-                        .requestMatchers("/api/swagger.html", "/api/swagger-ui/**", "/v3/api-docs/**").anonymous()
-                        .requestMatchers("/api/tutorials/**").hasAnyAuthority("ADMIN", "MODERATOR", "USER")
-                        .requestMatchers("/api/feedback/**").hasAnyAuthority("ADMIN", "MODERATOR", "USER")
-                        .requestMatchers("/api/user/user").hasAnyAuthority("ADMIN", "MODERATOR", "USER")
-                        .requestMatchers("/api/user/mod").hasAnyAuthority("ADMIN", "MODERATOR")
-                        .requestMatchers("/api/user/all").hasAnyAuthority("ADMIN")
-                        .requestMatchers("/api/user/admin").hasAuthority("ADMIN")
-                        .requestMatchers("/api/user/**").permitAll()
+                        .requestMatchers(ANONYMOUS_LIST_URLS).anonymous()
+                        .requestMatchers(USER_LIST_URLS).hasAnyAuthority("ADMIN", "MODERATOR", "USER")
+                        .requestMatchers(MODERATOR_LIST_URLS).hasAnyAuthority("ADMIN", "MODERATOR")
+                        .requestMatchers(ADMIN_LIST_URLS).hasAnyAuthority("ADMIN")
+                        .requestMatchers(PERMIT_ALL_LIST_URLS).permitAll()
                         .anyRequest().authenticated())
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
