@@ -23,9 +23,9 @@ public class FeedbackEntity {
     @Column(name = "feedback_text")
     private String feedbackText;
 
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "userent")
     @ManyToOne
-    private UserEntity user;
+    private UserEntity userent;
 
     @Column(name = "is_active")
     private Boolean isActive;

@@ -51,7 +51,7 @@ public class FeedbackServiceImpl implements FeedbackService {
                 .builder()
                 .feedbackText(request.getFeedbackText())
                 .isActive(request.isActive())
-                .user(userById)
+                .userent(userById)
                 .tutorial(tutorialById)
                 .grade(request.getGrade())
                 .build();
