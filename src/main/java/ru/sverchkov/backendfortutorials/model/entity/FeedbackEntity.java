@@ -1,62 +1,41 @@
 package ru.sverchkov.backendfortutorials.model.entity;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.proxy.HibernateProxy;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.proxy.HibernateProxy;
 
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tutorials")
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class TutorialEntity {
+public class FeedbackEntity {
     @Id
-    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id")
     private UUID id;
 
-    @Column(name = "title")
-    private String title;
+    @Column(name = "feedback_text")
+    private String feedbackText;
 
-    @Column(name = "description")
-    @Lob
-    private String description;
+    @JoinColumn(name = "userent")
+    @ManyToOne
+    private UserEntity userent;
 
-    @Column(name = "short_text")
-    private String shortText;
+    @Column(name = "is_active")
+    private Boolean isActive;
 
-    @JoinColumn(name = "full_text")
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @ToString.Exclude
-    private TutorialText fullText;
+    @Column(name = "grade")
+    private Integer grade;
 
-    @Column(name = "image")
-    private String image;
-
-    @Column(name = "published")
-    private boolean published;
-
-    @OneToMany
-    @ToString.Exclude
-    private List<FeedbackEntity> feedbacks;
-
-    @CreationTimestamp
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
-
-    @UpdateTimestamp
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
+    @JoinColumn(name = "tutorial")
+    @ManyToOne
+    private TutorialEntity tutorial;
 
     @Override
     public final boolean equals(Object o) {
@@ -65,7 +44,7 @@ public class TutorialEntity {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        TutorialEntity that = (TutorialEntity) o;
+        FeedbackEntity that = (FeedbackEntity) o;
         return getId() != null && Objects.equals(getId(), that.getId());
     }
 

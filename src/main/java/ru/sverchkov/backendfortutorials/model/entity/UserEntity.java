@@ -47,9 +47,9 @@ public class UserEntity {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<RoleEntity> roles = new HashSet<>();
 
-//    @OneToMany
-//    @ToString.Exclude
-//    private List<FeedbackEntity> feedbacks;
+    @OneToMany
+    @ToString.Exclude
+    private List<FeedbackEntity> feedbacks;
 
     @Override
     public final boolean equals(Object o) {
