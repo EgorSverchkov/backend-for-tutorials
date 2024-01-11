@@ -54,7 +54,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Stop other containers
         run: docker-compose down
-      - name: remove all containers
-        run: docker rm  $(docker ps -a -q)
+#      - name: remove all containers
+#        run: docker rm  $(docker ps -a -q)
       - name: Docker compose up
         run: docker-compose up -d
