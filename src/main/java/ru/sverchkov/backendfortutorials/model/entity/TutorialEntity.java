@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -45,9 +46,9 @@ public class TutorialEntity {
     @Column(name = "published")
     private boolean published;
 
-//    @OneToMany
-//    @ToString.Exclude
-//    private List<FeedbackEntity> feedbacks;
+    @OneToMany
+    @ToString.Exclude
+    private List<FeedbackEntity> feedbacks;
 
     @CreationTimestamp
     @Column(name = "created_at")
