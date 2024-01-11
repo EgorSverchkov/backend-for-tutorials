@@ -52,7 +52,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Stop and remove other containers
+      - name: Stop other containers
         run: docker-compose down
+      - name: remove all containers
+        run: docker image rm  -f $(docker ps -a -q)
       - name: Docker compose up
         run: docker-compose up -d
