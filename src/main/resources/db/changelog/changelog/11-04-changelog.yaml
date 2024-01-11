@@ -1,0 +1,152 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1704961350683-1
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: user_entity_id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: feedbacks_id
+                  type: UUID
+            tableName: auser_feedbacks
+  - changeSet:
+      id: 1704961350683-2
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_feedbackentity
+                  name: id
+                  type: UUID
+              - column:
+                  name: feedback_text
+                  type: VARCHAR(255)
+              - column:
+                  name: userent
+                  type: UUID
+              - column:
+                  name: is_active
+                  type: BOOLEAN
+              - column:
+                  name: grade
+                  type: INT
+              - column:
+                  name: tutorial
+                  type: UUID
+            tableName: feedback_entity
+  - changeSet:
+      id: 1704961350683-3
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                  name: tutorial_entity_id
+                  type: UUID
+              - column:
+                  constraints:
+                    nullable: false
+                  name: feedbacks_id
+                  type: UUID
+            tableName: tutorials_feedbacks
+  - changeSet:
+      id: 1704961350683-4
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addUniqueConstraint:
+            columnNames: feedbacks_id
+            constraintName: uc_auser_feedbacks_feedbacks
+            tableName: auser_feedbacks
+  - changeSet:
+      id: 1704961350683-5
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addUniqueConstraint:
+            columnNames: feedbacks_id
+            constraintName: uc_tutorials_feedbacks_feedbacks
+            tableName: tutorials_feedbacks
+  - changeSet:
+      id: 1704961350683-6
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: tutorial
+            baseTableName: feedback_entity
+            constraintName: FK_FEEDBACKENTITY_ON_TUTORIAL
+            referencedColumnNames: id
+            referencedTableName: tutorials
+  - changeSet:
+      id: 1704961350683-7
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: userent
+            baseTableName: feedback_entity
+            constraintName: FK_FEEDBACKENTITY_ON_USERENT
+            referencedColumnNames: id
+            referencedTableName: auser
+  - changeSet:
+      id: 1704961350683-8
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: feedbacks_id
+            baseTableName: auser_feedbacks
+            constraintName: fk_ausfee_on_feedback_entity
+            referencedColumnNames: id
+            referencedTableName: feedback_entity
+  - changeSet:
+      id: 1704961350683-9
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_entity_id
+            baseTableName: auser_feedbacks
+            constraintName: fk_ausfee_on_user_entity
+            referencedColumnNames: id
+            referencedTableName: auser
+  - changeSet:
+      id: 1704961350683-10
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: feedbacks_id
+            baseTableName: tutorials_feedbacks
+            constraintName: fk_tutfee_on_feedback_entity
+            referencedColumnNames: id
+            referencedTableName: feedback_entity
+  - changeSet:
+      id: 1704961350683-11
+      author: egorsverchkov (generated)
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: tutorial_entity_id
+            baseTableName: tutorials_feedbacks
+            constraintName: fk_tutfee_on_tutorial_entity
+            referencedColumnNames: id
+            referencedTableName: tutorials
+
