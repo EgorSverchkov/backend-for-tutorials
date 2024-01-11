@@ -2,7 +2,7 @@ databaseChangeLog:
   - include:
       file: classpath:/db/changelog/changelog/09-01-changelog.yaml
   - include:
-      file: classpath:/db/changelog/changelog/11-01-24-changelog.yaml
+      file: classpath:/db/changelog/changelog/11-01-changelog.yaml
   - include:
       file: classpath:/db/changelog/changelog/11-02-changelog.yaml
   - include:
