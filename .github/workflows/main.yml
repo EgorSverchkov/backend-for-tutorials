@@ -55,6 +55,6 @@ jobs:
       - name: Stop other containers
         run: docker-compose down
       - name: remove all containers
-        run: docker image rm  -f $(docker ps -a -q)
+        run: docker rm  $(docker ps -a -q)
       - name: Docker compose up
         run: docker-compose up -d
