@@ -1,7 +1,5 @@
 databaseChangeLog:
   - include:
-      file: classpath:/db/changelog/changelog/09-01-changelog.yaml
-  - include:
       file: classpath:/db/changelog/changelog/11-01-changelog.yaml
   - include:
       file: classpath:/db/changelog/changelog/11-02-changelog.yaml
@@ -21,5 +19,3 @@ databaseChangeLog:
       file: classpath:/db/changelog/changelog/25-01-changelog.yaml
   - include:
       file: classpath:/db/changelog/changelog/26-01-changelog.yaml
-  - include:
-      file: classpath:/db/changelog/changelog/11-01-24-changelog.yaml
