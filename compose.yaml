@@ -1,14 +1,10 @@
 version: '3.8'
 services:
   backend:
-    #platform: linux/amd64
     image: "egorsverchkov/tutorials-backend:latest"
     ports:
       - "8080:8080"
     depends_on:
-      - service-db
-#        condition: service_healthy
-    links:
       - service-db
     environment:
       - SERVER_PORT= 8080
@@ -25,11 +21,6 @@ services:
       - ./db/create_db.sql:/docker-entrypoint-initdb.d/create_db.sql
       - db-data:/var/lib/postgresql/data
     restart: unless-stopped
-#    healthcheck:
-#      test: ["CMD-SHELL", "pg_isready","-U","postgres", "-d", "tutorials_db"]
-#      interval: 10s
-#      timeout: 3s
-#      retries: 3
 
 volumes:
   db-data:
