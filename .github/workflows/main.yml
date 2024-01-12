@@ -45,7 +45,7 @@ jobs:
           push: true
           tags: ${{secrets.DOCKER_USERNAME}}/tutorials-backend:latest
 
-  run-on-vps:
+  run-on-vds:
     name: Run docker-compose on server
     runs-on: self-hosted
     needs: build-docker-image-and-deploy-to-dockerhub
