@@ -13,7 +13,8 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     show-sql: true
-
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
 acf:
   app:
     jwtExpirationMs: 1800000
