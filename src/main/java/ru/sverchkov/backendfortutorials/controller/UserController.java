@@ -52,13 +52,23 @@ public class UserController {
 
 
     @PutMapping("/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User updated", content = {
+                    @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UserResponse.class))
+            })
+    })
     public ResponseEntity<?> updateUser(@RequestBody UserUpdateRequest request, @PathVariable(name = "id") String id) {
-        return ResponseEntity
-                .ok(userService
-                        .updateUser(request, id));
+        return ResponseEntity.ok(userService.updateUser(request, id));
     }
 
     @GetMapping("/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "User found", content = {
+                    @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = UserResponse.class))
+            })
+    })
     public ResponseEntity<?> getUser(@PathVariable(name = "id") String id) {
         return ResponseEntity.ok(userService.loadUserById(id));
     }
