@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:15432/tutorials_db
+    url: jdbc:postgresql://localhost:5432/tutorials_db
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
@@ -13,7 +13,8 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     show-sql: true
-
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
 acf:
   app:
     jwtExpirationMs: 1800000

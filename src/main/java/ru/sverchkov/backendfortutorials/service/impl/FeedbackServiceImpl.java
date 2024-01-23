@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
+@Transactional
 public class FeedbackServiceImpl implements FeedbackService {
     private static final String FEEDBACK_DELETED = "Отзыв удален!";
     private static final String EMPTY_MESSAGE = "Ошибка! \nПустой запрос.";
@@ -37,7 +38,6 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
     @Override
-    @Transactional
     public FeedbackResponse createFeedback(FeedbackRequest request) {
         if(request == null) throw new EmptyRequestException(EMPTY_MESSAGE);
 
@@ -110,7 +110,6 @@ public class FeedbackServiceImpl implements FeedbackService {
     }
 
     @Override
-    @Transactional
     public String deleteById(String feedbackId) {
         feedbackRepository.deleteById(UUID.fromString(feedbackId));
         return FEEDBACK_DELETED;

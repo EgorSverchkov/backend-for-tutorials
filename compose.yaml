@@ -1,7 +1,6 @@
 version: '3.8'
 services:
   backend:
-    #platform: linux/amd64
     image: "egorsverchkov/tutorials-backend:latest"
     ports:
       - "8080:8080"
@@ -16,12 +15,10 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-    ports:
-      - "15432:5432"
     volumes:
       - ./db/create_db.sql:/docker-entrypoint-initdb.d/create_db.sql
-      - db-data:/var/lib/postgresql/data
-    restart: unless-stopped
+      #- db-data:/var/lib/postgresql/data
+    restart: always
 
 volumes:
   db-data:
